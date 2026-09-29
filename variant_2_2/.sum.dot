@@ -1,0 +1,5 @@
+digraph "CFG for 'sum' function" {
+	label="CFG for 'sum' function";
+
+	Node0x555e68cdcaa0 [shape=record,color="#b70d28ff", style=filled, fillcolor="#b70d2870" fontname="Courier",label="{1:\l|  %2 = trunc i64 %0 to i32\l  %3 = lshr i64 %0, 32\l  %4 = trunc i64 %3 to i32\l  %5 = add nsw i32 %4, %2\l  ret i32 %5\l}"];
+}
