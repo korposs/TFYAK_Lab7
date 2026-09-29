@@ -308,6 +308,16 @@ define dso_local noundef i32 @main() local_unnamed_addr #1 {
 | `-mem2reg` | Переменные переведены в SSA-форму, `alloca`/`store`/`load` удалены |
 | `-instcombine` | `getelementptr` заменены на битовые операции (`trunc`, `lshr`) |
 
+Скриншот diff между `struct_O0.ll` и `struct_O2.ll`:
+
+![Diff struct_O0 и struct_O2](screenshots/09_diff_struct.png)
+
+В diff видно, что:
+- Функция `sum`: `alloca`, `store`, `getelementptr` × 2, `load` × 2, `add`, `ret` → `trunc`, `lshr`, `trunc`, `add`, `ret`.
+- Функция `main`: 10 строк → 2 строки (`tail call @printf(5)` и `ret`).
+- Все инструкции работы с памятью удалены.
+- Значение `2 + 3` подставлено константой `5`.
+
 ### Анализ передачи структуры
 
 **До оптимизации (-O0):**
